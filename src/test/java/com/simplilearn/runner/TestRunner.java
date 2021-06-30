@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "src/test/java/Feature/Login.feature",
+		features = "src/test/java/Feature/AddToCart.feature",
 		glue = {"stepDefinition"},
 		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 		

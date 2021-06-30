@@ -2,7 +2,12 @@ package stepDefinition;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import com.simplilearn.exceldata.ExcelData;
+import com.simplilearn.exceldata.GetExcelDetails;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -70,5 +75,70 @@ public class LoginSteps {
 	public void user_successfully_logged_in_to_the_swiggy_account() {
 	    System.out.println("User is able to check the menu now");
 	    driver.close();
+	}
+	
+	
+	WebElement loc;
+	
+	@Given("User is on the swiggy homepage")
+	public void user_is_on_the_swiggy_homepage() {
+		//instantiating driver and running the url
+	    driver.get(siteUrl);
+	}
+	@Given("Clicked on delivery location")
+	public void clicked_on_delivery_location() {
+	    //finding location element
+		loc = driver.findElement(By.id("location"));
+		
+	}
+	@When("User entered the location name")
+	public void user_entered_the_location_name() throws InterruptedException {
+	    loc.sendKeys("Chennai");
+	    Thread.sleep(2000);
+	}
+	@When("Selected the current location from drop down")
+	public void selected_the_current_location_from_drop_down() {
+	    driver.findElement(By.cssSelector("#root > div._3arMG > div.nDVxx > div > div._1TWur > div._2COmU > div > div._3mZgT > div > div._1oLDb > div:nth-child(3)")).click();
+	}
+	@Then("User can check the nearby restaurants")
+	public void user_can_check_the_nearby_restaurants() {
+		driver.close();
+	    System.out.println("User can check the nearby restaurants");
+	}
+	
+	
+	
+	
+	GetExcelDetails excel = new GetExcelDetails();
+    String restaurant;
+	String item;
+	String quantity;
+	
+	@Given("User registered and logged in to Swiggy")
+	public void user_registered_and_logged_in_to_swiggy() {
+	    driver.get("https://www.swiggy.com/restaurants");
+	    
+	}
+	@Given("User selected the current location")
+	public void user_selected_the_current_lovation() throws InterruptedException {
+		loc.sendKeys("Chennai");
+	    Thread.sleep(2000);
+	}
+
+	@When("User read the restaurant from excel")
+	public void user_read_the_restaurant_from_excel() {
+		excel.getDetails(restaurant, item, quantity);
+	    System.out.println("The Restaurant Name is :"+restaurant);
+	    
+	    
+	}
+	@When("Selected the correct restaurant name")
+	public void selected_the_correct_restaurant_name() {
+	   driver.findElement(By.linkText(restaurant)).click();;
+	   
+	}
+	@Then("User can view the list of Items from that restaturant")
+	public void user_can_view_the_list_of_items_from_that_restaturant() {
+	    System.out.println("User can view the list of Items from that restaturant");;
 	}
 }
