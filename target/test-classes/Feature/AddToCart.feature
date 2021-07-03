@@ -24,15 +24,15 @@ Feature: Add and Checkout
   Scenario: Restaurant Selection
     Given User registered and logged in to Swiggy
     And User selected the current location
-    When User read the restaurant from excel
+    When User read the restaurant from the given list
     And Selected the correct restaurant name
     Then User can view the list of Items from that restaturant
 
-    @tag1
-  Scenario: Add to Cart and Checkout
-    Given User is on the restaturant page
-    And User able to view the items available
-    When User selected the required food
-    And Clicked on add
-    Then Clicked on checkout to order the food
-  
+    #@tag1
+  #Scenario: Add to Cart and Checkout
+    #Given User is on the restaturant page
+    #And User able to view the items available
+    #When User selected the required food
+    #And Clicked on add
+    #Then Clicked on checkout to order the food
+  #
